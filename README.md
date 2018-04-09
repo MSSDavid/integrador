@@ -3,9 +3,9 @@ Repositório criado para o trabalho em grupo da disciplina de Integração de Ap
 
 
 ## Integrantes
-David Matheus Santos Sousa 
-Guilherme Alves Rosa Silva
-João Pedro Salgado Di Cavalcanti Cunha
-Samuel Rocha Costa
+ David Matheus Santos Sousa e
+ Guilherme Alves Rosa Silva e
+ João Pedro Salgado Di Cavalcanti Cunha e
+ Samuel Rocha Costa.
 
 
