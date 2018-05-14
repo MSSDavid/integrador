@@ -8,7 +8,7 @@ Repositório onde serão armazenados os artefatos para a criação de um softwar
 ## Integrantes
 
 | Integrante | Função |
-|:-:|:-:|---|:-:|
+|:-:|:-:|
  David Matheus Santos Sousa | Documentação |
  Guilherme Alves Rosa Silva | Documentação |
  João Pedro Salgado Di Cavalcanti Cunha | Desenvolvedor | 
