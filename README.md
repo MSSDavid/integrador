@@ -10,6 +10,7 @@ Os dados a serem trocados serão: repositório (nome e link), código do commit 
 
 ## Frequência de Comunicação
 As aplicações terão mensagens enviadas sempre que houver um novo commit no repositório escolhido.
+Porém há um limite de 5000 solititações à API do GitHub por hora.
 
 ## Integrantes
 
