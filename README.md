@@ -3,6 +3,13 @@ Repositório criado para o trabalho onde serão armazenados os artefatos para a 
 
 ## Projeto
 O objetivo é fazer com que cada commit feito no GitHub seja enviado ao Google Drive através do método de integração de envio de mensagens.
+Isto garantirá uma cópia sobressalente dos arquivos do desenvolvedor que utilizar esta API.
+
+## Dados da Mensagem.
+Os dados a serem trocados serão: repositório (nome e link), código do commit (e também data, horário, usuário e mensagem), e metadados da comunicação (para um eventual log de envios de mensagens). O arquivo estará em formato JSON.
+
+## Frequência de Comunicação
+As aplicações terão mensagens enviadas sempre que houver um novo commit no repositório escolhido.
 
 ## Integrantes
 
@@ -12,9 +19,14 @@ O objetivo é fazer com que cada commit feito no GitHub seja enviado ao Google D
  Guilherme Alves Rosa Silva | Documentação |
  João Pedro Salgado Di Cavalcanti Cunha | Desenvolvedor | 
  Samuel Rocha Costa | Desenvolvedor | 
+ 
+ ## Comunicação
+ Pessoal e WhatsApp.
 
+## Ferramentas
+Visual Studio Code, GitHub, Emitter-io.
 
 ## Linguagens Utilizadas
 
-Javascript
+Javascript,
 HTML
