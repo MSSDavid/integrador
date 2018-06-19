@@ -2,7 +2,6 @@
 define('AMQP_DEBUG', false);
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
-use PhpAmqpLib\Exception\AMQPIOException;
 
 class Queue{
     private $url;
