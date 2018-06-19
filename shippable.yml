@@ -12,8 +12,7 @@ build:
     - mkdir -p shippable/codecoverage
     - phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage
     - echo "testing"
-
-after_script:
+  push:
     # Prove the files were written correctly
     - cd ..
     - ls -a shippable/testresults
