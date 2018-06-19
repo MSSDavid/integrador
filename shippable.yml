@@ -13,9 +13,6 @@ build:
     - phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage
     - echo "testing"
   push:
-    - ls shippable/testresults
-    - cat shippable/testresults/junit.xml
-    # check in test results for offline use
-    - git add shippable
+    - git add .
     - git commit -m 'update test results [skip ci]'
     - git push
