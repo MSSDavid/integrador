@@ -20,6 +20,14 @@ class Queue{
         $this->debug_mode = $debug_mode;
     }
 
+    private function testUrl(){
+        if(isset($this->url['host']) && isset($this->url['user']) && isset($this->url['pass'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     private function openConnection(){
         $this->conn = new AMQPStreamConnection($this->url['host'], 5672, $this->url['user'], $this->url['pass'], $this->vhost);
         $this->channelConnection = $this->conn->channel();
@@ -34,19 +42,27 @@ class Queue{
     }
 
     public function putMessage($message){
-        try{
-            self::openConnection();
-            $msg = new AMQPMessage($message, array('content_type' => 'text/plain', 'delivery_mode' => 2));
-            $this->channelConnection->basic_publish($msg, $this->exchange);
-            self::closeConnection();
-            if($this->debug_mode){
-                return array("response" => true);
-            }else{
-                return true;
+        if(self::testUrl()){
+            try{
+                self::openConnection();
+                $msg = new AMQPMessage($message, array('content_type' => 'text/plain', 'delivery_mode' => 2));
+                $this->channelConnection->basic_publish($msg, $this->exchange);
+                self::closeConnection();
+                if($this->debug_mode){
+                    return array("response" => true);
+                }else{
+                    return true;
+                }
+            }catch(Exception $e) {
+                if($this->debug_mode){
+                    return array("response" => false, "error" => $e);
+                }else{
+                    return false;
+                }
             }
-        }catch(Exception $e) {
+        }else{
             if($this->debug_mode){
-                return array("response" => false, "error" => $e);
+                return array("response" => false, "error" => "Invalid URL");
             }else{
                 return false;
             }
@@ -54,25 +70,33 @@ class Queue{
     }
 
     public function getMessage(){
-        try{
-            self::openConnection();
-            $retrived_msg = $this->channelConnection->basic_get($this->channel);
-            $message_type = gettype($retrived_msg);
-            if($message_type == "object"){
-                $this->channelConnection->basic_ack($retrived_msg->delivery_info['delivery_tag']);
-                $return = $retrived_msg->body;
-            }else{
-                $return = null;
+        if(self::testUrl()){
+            try{
+                self::openConnection();
+                $retrived_msg = $this->channelConnection->basic_get($this->channel);
+                $message_type = gettype($retrived_msg);
+                if($message_type == "object"){
+                    $this->channelConnection->basic_ack($retrived_msg->delivery_info['delivery_tag']);
+                    $return = $retrived_msg->body;
+                }else{
+                    $return = null;
+                }
+                self::closeConnection();
+                if($this->debug_mode){
+                    return array("response" => true, "message" => $return);
+                }else{
+                    return $return;
+                }
+            }catch(Exception $e) {
+                if($this->debug_mode){
+                    return array("response" => false, "error" => $e);
+                }else{
+                    return false;
+                }
             }
-            self::closeConnection();
+        }else{
             if($this->debug_mode){
-                return array("response" => true, "message" => $return);
-            }else{
-                return $return;
-            }
-        }catch(Exception $e) {
-            if($this->debug_mode){
-                return array("response" => false, "error" => $e);
+                return array("response" => false, "error" => "Invalid URL");
             }else{
                 return false;
             }
