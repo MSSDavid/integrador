@@ -1,5 +1,4 @@
 <?php
-
 define('AMQP_DEBUG', false);
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
