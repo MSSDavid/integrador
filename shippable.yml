@@ -13,13 +13,9 @@ build:
     - phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage
     - echo "testing"
   push:
-    # Prove the files were written correctly
-    - cd ..
-    - ls -a shippable/testresults
+    - ls shippable/testresults
     - cat shippable/testresults/junit.xml
     # check in test results for offline use
     - git add shippable
-    - git add imgboard/composer.*
-    # suppress infinite loop on ci
     - git commit -m 'update test results [skip ci]'
     - git push
