@@ -21,11 +21,31 @@ final class QueueTest extends TestCase{
         $this->assertEquals($message, $returnMessage);
     }
 
+    public function testPutAndGetMessageDebugMode(){
+        $q = new Queue($this->url, $this->channel, true);
+        $message = array("a" => 1, "b" => 10, "c" => "teste");
+        $message = json_encode($message);
+        $put_response =  $q->putMessage($message);
+        $get_response = $q->getMessage();
+
+        $this->assertEquals(true, $put_response['response']);
+        $this->assertEquals(true, $get_response['response']);
+        $this->assertEquals($message, $get_response['message']);
+    }
+
     public function getEmptyQueue(){
         $q = new Queue($this->url, $this->channel);
         $get_response = $q->getMessage();
 
         $this->assertEquals(null, $get_response);
+    }
+
+    public function getEmptyQueueDebugMode(){
+        $q = new Queue($this->url, $this->channel, true);
+        $get_response = $q->getMessage();
+
+        $this->assertEquals(true, $get_response['response']);
+        $this->assertEquals(null, $get_response['message']);
     }
 
     public function testPutMessageFakeUrl(){
