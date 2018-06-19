@@ -5,7 +5,7 @@ php:
 
 before_script:
     - composer self-update -n
-    - composer install --prefer-dist -n
+    - composer update
 
 build:
   ci:
