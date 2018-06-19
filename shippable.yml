@@ -5,7 +5,7 @@ php:
 env:
   - COMPOSER_ALLOW_SUPERUSER=1
 before_script:
-    - composer install
+    - composer update
 build:
   ci:
     - mkdir -p shippable/testresults
