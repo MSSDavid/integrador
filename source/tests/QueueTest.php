@@ -67,7 +67,7 @@ final class QueueTest extends TestCase{
         $put_response = $q->putMessage($message);
 
         $this->assertEquals(false, $put_response["response"]);
-        $this->assertContains('error', $put_response);
+        $this->assertArrayHasKey('error', $put_response);
     }
 
     public function testGetMessageFakeUrlDebugMode(){
@@ -75,7 +75,7 @@ final class QueueTest extends TestCase{
         $get_response = $q->getMessage();
 
         $this->assertEquals(false, $get_response["response"]);
-        $this->assertContains('error', $get_response);
+        $this->assertArrayHasKey('error', $get_response);
     }
 
     public function testPutMessageInvalidUrlDebugMode(){
@@ -85,7 +85,7 @@ final class QueueTest extends TestCase{
         $put_response = $q->putMessage($message);
 
         $this->assertEquals(false, $put_response["response"]);
-        $this->assertContains('error', $put_response);
+        $this->assertArrayHasKey('error', $put_response);
         $this->assertEquals("Invalid URL", $put_response["error"]);
     }
 
@@ -94,7 +94,7 @@ final class QueueTest extends TestCase{
         $get_response = $q->getMessage();
 
         $this->assertEquals(false, $get_response["response"]);
-        $this->assertContains('error', $get_response);
+        $this->assertArrayHasKey('error', $get_response);
     }
 }
 ?>
