@@ -5,9 +5,7 @@ php:
 env:
   - COMPOSER_ALLOW_SUPERUSER=1
 before_script:
-    - composer self-update -n
-    - composer install --prefer-dist -n
-
+    - composer install
 build:
   ci:
     - mkdir -p shippable/testresults
