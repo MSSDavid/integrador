@@ -15,4 +15,4 @@ build:
   push:
     - git add .
     - git commit -m 'update test results [skip ci]'
-    - git push
+    - git push master
