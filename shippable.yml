@@ -5,6 +5,7 @@ php:
 env:
   - COMPOSER_ALLOW_SUPERUSER=1
 before_script:
+    - git checkout tests
     - composer update
 build:
   ci:
@@ -13,7 +14,6 @@ build:
     - phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage
     - echo "testing"
   push:
-    - git checkout master
     - git add .
     - git commit -m 'update test results [skip ci]'
     - git push master
