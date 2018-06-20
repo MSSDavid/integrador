@@ -24,6 +24,9 @@ Porém há um limite de 5000 solititações à API do GitHub por hora.
  João Pedro Salgado Di Cavalcanti Cunha | Desenvolvedor | 
  Samuel Rocha Costa | Desenvolvedor | 
  
+ ## Documentação da classe
+ [Clique aqui](https://mssdavid.github.io/integrador/) para acessar a documentação.
+ 
  ## Comunicação
  Pessoal e WhatsApp.
 
