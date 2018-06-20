@@ -9,6 +9,6 @@ $fake2 = "amqp://teste456:xGA2xHF8jbYiDdyzKHNocxKyh4GgXT5a@baboon.rmq.cloudamqp.
 $fake3 = "qempq://teste456:xGA2xHF8jbYiDdyzKHNocxKyh4GgXT5a@asassa.asfaf.fasfasfa.asfa/teste123";
 
 
-$Queue = new Queue($url, $channel, true);
+$Queue = new Queue($url, $channel);
 echo json_encode(array("response" => "ok", "message" => $Queue->getMessage()));
 exit;

@@ -1,15 +1,28 @@
 <?php
 require 'vendor/autoload.php';
-
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Esta classe implementa os testes da classe Queue em apps/QueueTest
+ *
+ * @author  samuelrcosta
+ * @version 1.0.0, 20/06/2018
+ * @since   1.0.0, 20/06/2018
+ */
 final class QueueTest extends TestCase{
 
+    // Canal para testes
     private $channel = "test";
+    // Url válida
     private $url = "amqp://xitcrhfn:xGA2xHF8jbYiDdyzKHNocxKyh4GgXT5a@baboon.rmq.cloudamqp.com/xitcrhfn";
+    // Url falsa, mas com o formato amqp
     private $fakeUrl = "amqp://fake5421:xGA2xHF8jbYiDdyzKHNocxKyh4GgXT5a@baboon.rmq.cloudamqp.com/fake123";
+    // Url inválida
     private $invalidUrl = "invalidUrl";
 
+    /**
+     * Esta função testa as operações simples de colocar e retirar uma mensagem, usa o putMessage para colocar uma mensagem no canal e a compara com a mensagem recebida utilizando o getMessage
+     */
     public function testPutAndGetMessage(){
         $q = new Queue($this->url, $this->channel);
         $message = array("a" => 1, "b" => 10, "c" => "teste");
@@ -21,6 +34,9 @@ final class QueueTest extends TestCase{
         $this->assertEquals($message, $returnMessage);
     }
 
+    /**
+     * Esta função testa as operações simples de colocar e retirar uma mensagem, porém com o debug ativado
+     */
     public function testPutAndGetMessageDebugMode(){
         $q = new Queue($this->url, $this->channel, true);
         $message = array("a" => 1, "b" => 10, "c" => "teste");
@@ -33,6 +49,9 @@ final class QueueTest extends TestCase{
         $this->assertEquals($message, $get_response['message']);
     }
 
+    /**
+     * Esta função testa o resultado da função quando a fila de mensagens está vazia
+     */
     public function testGetEmptyQueue(){
         $q = new Queue($this->url, $this->channel);
         $get_response = $q->getMessage();
@@ -40,6 +59,9 @@ final class QueueTest extends TestCase{
         $this->assertEquals(null, $get_response);
     }
 
+    /**
+     * Esta função testa o resultado da função quando a fila de mensagens está vazia, entretanto com o debug ativado
+     */
     public function testGetEmptyQueueDebugMode(){
         $q = new Queue($this->url, $this->channel, true);
         $get_response = $q->getMessage();
@@ -48,6 +70,9 @@ final class QueueTest extends TestCase{
         $this->assertEquals(null, $get_response['message']);
     }
 
+    /**
+     * Esta função testa o resultado de colocar uma mensagem no canal utilizando uma Url falsa
+     */
     public function testPutMessageFakeUrl(){
         $q = new Queue($this->fakeUrl, $this->channel);
         $message = array("a" => 1, "b" => 10, "c" => "teste");
@@ -57,6 +82,9 @@ final class QueueTest extends TestCase{
         $this->assertEquals(false, $put_response);
     }
 
+    /**
+     * Esta função testa o resultado de retirar uma mensagem do canal utilizando uma Url falsa
+     */
     public function testGetMessageFakeUrl(){
         $q = new Queue($this->fakeUrl, $this->channel);
         $get_response = $q->getMessage();
@@ -64,6 +92,9 @@ final class QueueTest extends TestCase{
         $this->assertEquals(false, $get_response);
     }
 
+    /**
+     * Esta função testa o resultado de colocar uma mensagem no canal utilizando uma Url inválida
+     */
     public function testPutMessageInvalidUrl(){
         $q = new Queue($this->invalidUrl, $this->channel);
         $message = array("a" => 1, "b" => 10, "c" => "teste");
@@ -73,6 +104,9 @@ final class QueueTest extends TestCase{
         $this->assertEquals(false, $put_response);
     }
 
+    /**
+     * Esta função testa o resultado de retirar uma mensagem do canal utilizando uma Url inválida
+     */
     public function testGetMessageInvalidUrl(){
         $q = new Queue($this->invalidUrl, $this->channel);
         $get_response = $q->getMessage();
@@ -80,6 +114,9 @@ final class QueueTest extends TestCase{
         $this->assertEquals(false, $get_response);
     }
 
+    /**
+     * Esta função testa o resultado de colocar uma mensagem no canal utilizando uma Url falsa, porém com o modo debug ativado
+     */
     public function testPutMessageFakeUrlDebugMode(){
         $q = new Queue($this->fakeUrl, $this->channel, true);
         $message = array("a" => 1, "b" => 10, "c" => "teste");
@@ -90,6 +127,9 @@ final class QueueTest extends TestCase{
         $this->assertArrayHasKey('error', $put_response);
     }
 
+    /**
+     * Esta função testa o resultado de retirar uma mensagem do canal utilizando uma Url falsa, porém com o modo debug ativado
+     */
     public function testGetMessageFakeUrlDebugMode(){
         $q = new Queue($this->fakeUrl, $this->channel, true);
         $get_response = $q->getMessage();
@@ -98,6 +138,9 @@ final class QueueTest extends TestCase{
         $this->assertArrayHasKey('error', $get_response);
     }
 
+    /**
+     * Esta função testa o resultado de colocar uma mensagem no canal utilizando uma Url inválida, porém com o modo debug ativado
+     */
     public function testPutMessageInvalidUrlDebugMode(){
         $q = new Queue($this->invalidUrl, $this->channel, true);
         $message = array("a" => 1, "b" => 10, "c" => "teste");
@@ -109,6 +152,9 @@ final class QueueTest extends TestCase{
         $this->assertEquals("Invalid URL", $put_response["error"]);
     }
 
+    /**
+     * Esta função testa o resultado de retirar uma mensagem do canal utilizando uma Url inválida, porém com o modo debug ativado
+     */
     public function testGetMessageInvalidUrlDebugMode(){
         $q = new Queue($this->invalidUrl, $this->channel, true);
         $get_response = $q->getMessage();
