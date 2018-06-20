@@ -21,8 +21,8 @@ class Queue{
     private $channel;
     // Variável que armazena a conexão com o canal
     private $channelConnection;
-    // Tipo de interação com o canal (no topic as mensagens enviadas vão apenas para o canal esperado)
-    private $exchange = 'amq.topic';
+    // Tipo de interação com o canal
+    private $exchange;
     // host extraído da url
     private $vhost;
     // Conexão com o CloudAMQP
@@ -40,6 +40,7 @@ class Queue{
     public function __construct($url, $channel, $debug_mode = false){
         $this->url = parse_url($url);
         $this->channel = $channel;
+        $this->exchange = $channel;
         $this->vhost = substr($this->url['path'], 1);
         $this->debug_mode = $debug_mode;
     }
@@ -64,7 +65,8 @@ class Queue{
         $this->conn = new AMQPStreamConnection($this->url['host'], 5672, $this->url['user'], $this->url['pass'], $this->vhost);
         $this->channelConnection = $this->conn->channel();
         $this->channelConnection->queue_declare($this->channel, false, true, false, false);
-        $this->channelConnection->exchange_declare($this->exchange, 'topic', true, true, false);
+        //$this->channelConnection->exchange_declare($this->exchange, 'direct', true, true, false);
+        $this->channelConnection->exchange_declare($this->exchange, 'fanout', false, true, false);
         $this->channelConnection->queue_bind($this->channel, $this->exchange);
     }
 

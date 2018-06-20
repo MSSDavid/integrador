@@ -4,6 +4,7 @@ require "app/Queue.php";
 
 $url = "amqp://xitcrhfn:xGA2xHF8jbYiDdyzKHNocxKyh4GgXT5a@baboon.rmq.cloudamqp.com/xitcrhfn";
 $channel = "development";
+
 $fake ="TESTE";
 $fake2 = "amqp://teste456:xGA2xHF8jbYiDdyzKHNocxKyh4GgXT5a@baboon.rmq.cloudamqp.com/teste123";
 $fake3 = "qempq://teste456:xGA2xHF8jbYiDdyzKHNocxKyh4GgXT5a@asassa.asfaf.fasfasfa.asfa/teste123";
