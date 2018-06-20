@@ -7,7 +7,7 @@ class Queue{
     private $url;
     private $channel;
     private $channelConnection;
-    private $exchange = 'amq.direct';
+    private $exchange = 'amq.fanout';
     private $vhost;
     private $conn;
     private $debug_mode;
@@ -31,7 +31,7 @@ class Queue{
         $this->conn = new AMQPStreamConnection($this->url['host'], 5672, $this->url['user'], $this->url['pass'], $this->vhost);
         $this->channelConnection = $this->conn->channel();
         $this->channelConnection->queue_declare($this->channel, false, true, false, false);
-        $this->channelConnection->exchange_declare($this->exchange, 'direct', true, true, false);
+        $this->channelConnection->exchange_declare($this->exchange, 'fanout', true, true, false);
         $this->channelConnection->queue_bind($this->channel, $this->exchange);
     }
 
