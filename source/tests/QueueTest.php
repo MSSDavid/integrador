@@ -110,11 +110,12 @@ final class QueueTest extends TestCase{
     }
 
     public function testGetMessageInvalidUrlDebugMode(){
-        $q = new Queue($this->fakeUrl, $this->channel, true);
+        $q = new Queue($this->invalidUrl, $this->channel, true);
         $get_response = $q->getMessage();
 
         $this->assertEquals(false, $get_response["response"]);
         $this->assertArrayHasKey('error', $get_response);
+        $this->assertEquals("Invalid URL", $get_response["error"]);
     }
 }
 ?>
