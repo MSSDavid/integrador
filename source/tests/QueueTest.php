@@ -33,14 +33,14 @@ final class QueueTest extends TestCase{
         $this->assertEquals($message, $get_response['message']);
     }
 
-    public function getEmptyQueue(){
+    public function testGetEmptyQueue(){
         $q = new Queue($this->url, $this->channel);
         $get_response = $q->getMessage();
 
         $this->assertEquals(null, $get_response);
     }
 
-    public function getEmptyQueueDebugMode(){
+    public function testGetEmptyQueueDebugMode(){
         $q = new Queue($this->url, $this->channel, true);
         $get_response = $q->getMessage();
 
