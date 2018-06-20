@@ -15,6 +15,7 @@ final class QueueTest extends TestCase{
         $message = array("a" => 1, "b" => 10, "c" => "teste");
         $message = json_encode($message);
         $put_response =  $q->putMessage($message);
+        $q = new Queue($this->url, $this->channel);
         $returnMessage = $q->getMessage();
 
         $this->assertEquals(true, $put_response);
@@ -26,6 +27,7 @@ final class QueueTest extends TestCase{
         $message = array("a" => 1, "b" => 10, "c" => "teste");
         $message = json_encode($message);
         $put_response =  $q->putMessage($message);
+        $q = new Queue($this->url, $this->channel, true);
         $get_response = $q->getMessage();
 
         $this->assertEquals(true, $put_response['response']);
