@@ -55,11 +55,8 @@ class Queue{
      * @return boolean true caso a URL esteja válida e falso caso não esteja
      */
     private function testUrl(){
-        if(isset($this->url['host']) && isset($this->url['user']) && isset($this->url['pass'])){
-            return true;
-        }else{
-            return false;
-        }
+       return isset($this->url['host']) && isset($this->url['user']) && isset($this->url['pass']);
+        
     }
 
     /**
