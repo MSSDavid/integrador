@@ -1,6 +1,6 @@
 <?php
-require('../vendor/autoload.php');
-require "app/Queue.php";
+require('../../vendor/autoload.php');
+require "../app/Queue.php";
 
 $url = "amqp://xitcrhfn:xGA2xHF8jbYiDdyzKHNocxKyh4GgXT5a@baboon.rmq.cloudamqp.com/xitcrhfn";
 $channel = "development";
