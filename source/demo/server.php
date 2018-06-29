@@ -19,8 +19,26 @@
     <span class="navbar-brand mb-0 h1">Demonstração - Servidor</span>
   </nav>
 
-  <div class="container">
-     <button type="button" id="pegarMensagem" class="btn btn-primary">Enviar Mensagem</button>
+  <div class="container" style="margin-top:40px">
+      <div style="text-align: center; display:none;" id="container-mensagem">
+      <h2>Mensagem Recebida</h2>
+      <blockquote style="background-color: #CCC; width: fit-content; margin: auto;text-align: left; padding: 25px; border-radius: 5px;">
+        {<br>
+          &emsp;"user": "<span id="user"></span>",<br>
+          &emsp;"commit": "<span id="commit"></span>"<br>
+        }
+      </blockquote>
+
+    </div>
+      <div style="text-align: center;display: none;" id="container-vazio">
+        <b style="color:red">Fila Vazia</b>
+      </div>
+      <div style="text-align: center;display: none;" id="container-erro">
+        <b style="color:red">Erro ao conectar no canal</b>
+      </div>
+      <div style="text-align: center; margin-top:30px">
+       <button type="button" id="pegarMensagem" class="btn btn-primary">Pegar Mensagem</button>
+     </div>
   </div>
 
 <script>
@@ -33,7 +51,25 @@
 
      function get(){
        $.getJSON("get.php", function(data){
-              console.log(data);
+            if(data.response == 'ok'){
+                if(data.message == null){
+                  $('#container-mensagem').slideUp();
+                 $('#container-vazio').slideDown();
+                 $('#container-erro').slideUp();
+                }else{
+                  let mensagem = JSON.parse(data.message); 
+                  $("#user").html(mensagem.user);
+                  $("#commit").html(mensagem.commit);
+                   $('#container-mensagem').slideDown();
+                 $('#container-vazio').slideUp();
+                 $('#container-erro').slideUp();
+                }
+                
+            }else{
+               $('#container-mensagem').slideUp();
+               $('#container-vazio').slideUp();
+               $('#container-erro').slideDown();
+            }
        });           
 
     }

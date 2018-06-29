@@ -15,18 +15,35 @@
 </head>
 <body>
   <nav class="navbar navbar-primary bg-primary">
-    <span class="navbar-brand mb-0 h1">Demonstração</span>
+    <span class="navbar-brand mb-0 h1">Demonstração - Gerador de Mensagens</span>
   </nav>
   <div class="container">
-    <button type="button" id="gerarMensagem" class="btn btn-primary">Gerar Mensagem</button><br>
+    <div style="text-align: center; margin-top:40px">
+      <a href="server.php" target="_blank" class="btn btn-primary">Abrir Servidor</a>
+    </div>
+    <div style="text-align: center">
+      <h2>Mensagem a ser Enviada</h2>
+      <blockquote style="background-color: #CCC; width: fit-content; margin: auto;text-align: left; padding: 25px; border-radius: 5px;">
+        {<br>
+          &emsp;"user": "<span id="user"></span>",<br>
+          &emsp;"commit": "<span id="commit"></span>"<br>
+        }
+      </blockquote>
+    </div>
+     <div style="text-align: center; margin-top:20px">
+    <button type="button" id="gerarMensagem" class="btn btn-primary">Gerar Mensagem</button>
+    </div>
+    <div style="text-align: center; margin-top:10px">
     <button type="button" id="enviarMensagem" class="btn btn-primary">Enviar Mensagem</button>
+    </div>
   </div>
+
   		
 
 <script>
+    
     var mensagem = { user:"", commit: ""};
-
-     $(document).ready(function(){
+    $(document).ready(function(){
          gerarMensagem();
         $("#gerarMensagem").click(function(){
            gerarMensagem();
@@ -36,7 +53,7 @@
         });
     });
 
-function send(){   
+      function send(){   
          var json = {"message": JSON.stringify(mensagem)};
          $.ajax({
          url: "put.php",
@@ -48,13 +65,13 @@ function send(){
          console.log(data);
         }
       });
-  }
+    }
 
    function gerarMensagem(){
-    let commit = stringAleatoria(10);
-     sha256(commit).then(function(digest) {
-      commit = digest;
-      let user = userAleatorio();
+       let commit = stringAleatoria(10);
+       sha256(commit).then(function(digest) {
+       commit = digest;
+       let user = userAleatorio();
        alterarMensagem(user, commit);
 
     });
@@ -64,6 +81,9 @@ function send(){
       mensagem.user = user;
       mensagem.commit = commit;
       console.log(mensagem);
+      $("#user").html(mensagem.user);
+      $("#commit").html(mensagem.commit);
+
  }
 
    function userAleatorio(){
@@ -71,19 +91,19 @@ function send(){
    }
 
    function stringAleatoria(tamanho){
-     let letras = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
-    let aleatorio = '';
-    for (let i = 0; i < tamanho; i++) {
-        let rnum = Math.floor(Math.random() * letras.length);
-        aleatorio += letras.substring(rnum, rnum + 1);
+       let letras = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+       let aleatorio = '';
+       for (let i = 0; i < tamanho; i++) {
+          let rnum = Math.floor(Math.random() * letras.length);
+          aleatorio += letras.substring(rnum, rnum + 1);
     }
-    return aleatorio;
+       return aleatorio;
    }
 
   function sha256(str) {
-  var buffer = new TextEncoder("utf-8").encode(str);
-  return crypto.subtle.digest("SHA-256", buffer).then(function (hash) {
-    return hex(hash);
+     var buffer = new TextEncoder("utf-8").encode(str);
+     return crypto.subtle.digest("SHA-256", buffer).then(function (hash) {
+     return hex(hash);
   });
 }
 
@@ -91,26 +111,16 @@ function hex(buffer) {
   var hexCodes = [];
   var view = new DataView(buffer);
   for (var i = 0; i < view.byteLength; i += 4) {
-    // Using getUint32 reduces the number of iterations needed (we process 4 bytes each time)
     var value = view.getUint32(i)
-    // toString(16) will give the hex representation of the number without padding
     var stringValue = value.toString(16)
-    // We use concatenation and slice for padding
     var padding = '00000000'
     var paddedValue = (padding + stringValue).slice(-padding.length)
     hexCodes.push(paddedValue);
   }
-
-  // Join all the hex strings into one
   return hexCodes.join("");
 }
 
-//sha256("foobar").then(function(digest) {
-  //console.log(digest);
-//});
-
-
-
 </script>
+
 </body>
 </html>
