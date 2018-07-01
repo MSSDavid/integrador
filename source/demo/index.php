@@ -6,6 +6,7 @@
     <title>Demonstração</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 	<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -36,6 +37,18 @@
     <div style="text-align: center; margin-top:10px">
     <button type="button" id="enviarMensagem" class="btn btn-primary">Enviar Mensagem</button>
     </div>
+    <div id="aguarde" style="text-align: center;display: flex;justify-content: center;align-items: center;margin-top: 30px; display: none;">
+      <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+      <b>Enviando Mensagem<b>
+    </div>
+    <div id="erro" style="text-align: center;display: flex;justify-content: center;align-items: center;margin-top: 30px; color:red; display: none;">
+      <i class="fa fa-times"></i>
+      <b>Erro ao Enviar a Mensagem!<b>
+    </div>
+    <div id="sucesso" style="text-align: center;display: flex;justify-content: center;align-items: center;margin-top: 30px; color:green; display: none;">
+      <i class="fa fa-check"></i>
+      <b>Mensagem enviada com sucesso!<b>
+    </div>
   </div>
 
   		
@@ -49,7 +62,8 @@
            gerarMensagem();
         }); 
         $("#enviarMensagem").click(function(){
-           send();
+            $('#aguarde').slideDown();
+            setTimeout(send, 0);
         });
     });
 
@@ -62,10 +76,17 @@
          contentType: 'application/json',
          data: JSON.stringify(json),
          sucess: function(data){
-         console.log(data);
-        }
-      });
-    }
+          data = JSON.parse(data);
+          if(data.response == 'ok'){
+              $('#erro').slideUp('slow');
+              $('#sucesso').slideDown('slow');
+              }else{
+              $('#erro').slideDown('slow');
+              $('#sucesso').slideUp('slow');
+              }
+            }
+        });
+      }
 
    function gerarMensagem(){
        let commit = stringAleatoria(10);
