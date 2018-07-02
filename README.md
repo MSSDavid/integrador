@@ -5,7 +5,7 @@
 *Universidade Federal de Goiás - Engenharia de Software (2018/1)*   
 *Integração de Aplicações*   
 
-Implementação de uma solução para a integração entre dois microserviços de um software, nos quais possuem filas distintas de processamento. A classe [Queue.php](https://github.com/MSSDavid/integrador/blob/master/source/app/Queue.php) utiliza o método de troca de mensagens através do [RabbitMQ](https://www.rabbitmq.com/).
+Implementação de uma solução para a integração entre dois microserviços de um software, nos quais possuem filas distintas de processamento. A classe [Queue.php](https://github.com/MSSDavid/integrador/blob/master/source/app/Queue.php) por meio do [RabbitMQ](https://www.rabbitmq.com/) utiliza o método de troca de mensagens para resolver este problema.  
 
 ## Problema a ser Resolvido
  O problema a ser resolvido será a comunicação entre dois microserviços de uma aplicação que oferece o serviço que realiza replicações de segurança de repositórios do GitHub na núvem do Google Drive.  
