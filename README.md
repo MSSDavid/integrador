@@ -1,5 +1,7 @@
 [![Run Status](https://api.shippable.com/projects/5b286fd26104a90700905497/badge?branch=master)](https://app.shippable.com/github/MSSDavid/integrador)
 [![Coverage Badge](https://api.shippable.com/projects/5b286fd26104a90700905497/coverageBadge?branch=master)](https://app.shippable.com/github/MSSDavid/integrador)  
+![Bug Badge](https://sonarcloud.io/api/project_badges/measure?project=integraccaoi2018&metric=bugs)
+
 
 # Integrador de Microserviços
 *Universidade Federal de Goiás - Engenharia de Software (2018/1)*   
@@ -69,6 +71,7 @@ Porém há um limite de 5000 solititações à API do GitHub por hora.
 * Para realização os testes unitários e métricas de cobertura de código, foi utilizado o [PHPUnit](https://phpunit.de/).
 * Para a integração contínua do projeto foi utilizado o [Shippable](https://www.shippable.com/).
 * Para o gerenciamento das bibliotecas a serem utilizadas pelo projeto, foi utilizado o [Composer](https://getcomposer.org/)
+
 
 ## Integrantes
 
