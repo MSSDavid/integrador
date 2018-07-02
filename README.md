@@ -13,15 +13,10 @@ Os dados a serem trocados serão: repositório (nome e link), código do commit 
 
 ## Como testar o sistema
 
-Ao executar o "demo" será possível visualizar esta tela
-
-Ela nela é possível visualizar um exemplo de JSON que pode ser enviado pela API. 
+Ao executar o "demo" será possível um exemplo de JSON que pode ser enviado pela API. 
 Este JSON será posteriormente transformado numa String, e ao selecionar o botão "Enviar Mensagem", o servidor (que pode ser aberto ao clicar no botão Abrir Servidor).
 Com o servidor aberto, ao selecionar o botão: "Receber Mensagem" exibirá a mensagem que foi enviada. 
-
-Caso nenhuma mensagem tenha sido previamente enviada, é esperado a seguinte mensagem de erro:
-
-
+Caso nenhuma mensagem tenha sido previamente enviada, é esperado uma mensagem de erro.
 
 ## Frequência de Comunicação
 As aplicações terão mensagens enviadas sempre que houver um novo commit no repositório escolhido.
