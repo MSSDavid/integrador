@@ -71,6 +71,102 @@ final class QueueTest extends TestCase{
     }
 
     /**
+     * Esta função testa a função get Url, que deve simplesmente retornar a url da instãncia
+     */
+    public function testGetUrl(){
+        $q = new Queue($this->url, $this->channel);
+        $url = $q->getUrl();
+
+        $this->assertEquals($this->url, $url);
+    }
+
+    /**
+     * Esta função testa a função get Channel, que deve simplesmente retornar o canal da instãncia
+     */
+    public function testGetChannel(){
+        $q = new Queue($this->url, $this->channel);
+        $channel = $q->getChannel();
+
+        $this->assertEquals($this->channel, $channel);
+    }
+
+    /**
+     * Esta função testa a função set Url, que deve simplesmente alterar a url da instância
+     */
+    public function testSetUrl(){
+        $q = new Queue($this->url, $this->channel);
+        $newUrl = "new_url_test";
+        $response = $q->setUrl($newUrl);
+
+        // Pega a url de volta
+        $url = $q->getUrl();
+
+        $this->assertEquals($newUrl, $url);
+        $this->assertEquals(true, $response);
+    }
+
+    /**
+     * Esta função testa a função set Url, mas quando uma conexão estiver aberta com o servidor, deverá retornar false
+     */
+    public function testSetUrlOpenConn(){
+        $q = new Queue($this->url, $this->channel, false);
+        // Abre a conexão
+        $q->openConnection();
+
+        // Tenta alterar a Url
+        $newUrl = "new_url_test";
+        $response = $q->setUrl($newUrl);
+
+        // Pega a url de volta
+        $url = $q->getUrl();
+
+        // Fecha a conexão
+        $q->closeConnection();
+
+        // a url retornada deve ser igual a antigo (não alterou)
+        $this->assertEquals($this->url, $url);
+        $this->assertEquals(false, $response);
+    }
+
+    /**
+     * Esta função testa a função set Channel, que deve simplesmente alterar o canal da instância
+     */
+    public function testSetChannel(){
+        $q = new Queue($this->url, $this->channel);
+        $newChannel = "new_channel_test";
+        $response = $q->setChannel($newChannel);
+
+        // Pega o canal de volta
+        $channel = $q->getChannel();
+
+        $this->assertEquals($newChannel, $channel);
+        $this->assertEquals(true, $response);
+    }
+
+    /**
+     * Esta função testa a função set Channel, mas quando uma conexão estiver aberta com o servidor, deverá retornar false
+     */
+    public function testSetChannelOpenConn(){
+        $q = new Queue($this->url, $this->channel, false);
+        // Abre a conexão
+        $q->openConnection();
+
+        // Tenta alterar o canal
+        $newChannel = "new_channel_test";
+        $response = $q->setChannel($newChannel);
+
+        // Pega o canal de volta
+        $channel = $q->getChannel();
+
+        // Fecha a conexão
+        $q->closeConnection();
+
+        // o canal retornado deve ser igual o antigo (não alterou)
+        $this->assertEquals($this->channel, $channel);
+        $this->assertEquals(false, $response);
+    }
+
+    /**
      * Esta função testa o resultado da função quando a fila de mensagens está vazia
      */
     public function testGetEmptyQueue(){

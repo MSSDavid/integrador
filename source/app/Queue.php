@@ -44,15 +44,79 @@ class Queue{
      * @param   $auto_connection     boolean por padrão true do modo de auto conexão.
      * @param   $debug_mode          boolean por padrão false do modo de debug.
      */
-    public function __construct($url, $channel,$auto_connection = true , $debug_mode = false){
-        $this->url = parse_url($url);
-        $this->channel = $channel;
-        $this->exchange = $channel;
-        $this->vhost = substr($this->url['path'], 1);
+    public function __construct($url, $channel, $auto_connection = true, $debug_mode = false){
+        self::prepareToConnection($url, $channel);
         $this->debug_mode = $debug_mode;
         $this->auto_connection = $auto_connection;
         $this->channelConnection = null;
         $this->conn = null;
+    }
+
+    /**
+     * Esta função faz as configurações iniciais necessárias com a URL e com o canal para que uma conexão com o CloudAMQP seja aberta
+     *
+     * @param   $url                 string para a url AMQP.
+     * @param   $channel             string para o nome do canal.
+     */
+    private function prepareToConnection($url, $channel){
+        $this->url = parse_url($url);
+        $this->channel = $channel;
+        $this->exchange = $channel;
+        $this->vhost = substr($this->url['path'], 1);
+    }
+
+    /**
+     * Retorna a url da instância
+     *
+     * @return   String com a url da intância
+     */
+    public function getUrl(){
+        return $this->url;
+    }
+
+    /**
+     * Retorna o canal da instância
+     *
+     * @return   String com o canal da intância
+     */
+    public function getChannel(){
+        return $this->channel;
+    }
+
+    /**
+     * Altera a url da instância, caso já não exista uma conexão em aberto
+     *
+     * @param   $url    String com a nova url
+     *
+     * @return   boolean true caso a alteração tenha sido feito com sucesso, false caso contrário
+     */
+    public function setUrl($url){
+        if(!$this->channelConnection && !$this->conn) {
+            $this->url = $url;
+            // Prepara para a conexão novamente
+            self::prepareToConnection($this->url, $this->channel);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Altera o canal da instância, caso já não exista uma conexão em aberto
+     *
+     * @param   $channel    String com o novo canal
+     *
+     * @return   boolean true caso a alteração tenha sido feito com sucesso, false caso contrário
+     */
+    public function setChannel($channel){
+        if(!$this->channelConnection && !$this->conn) {
+            $this->channel = $channel;
+            // Prepara para a conexão novamente
+            self::prepareToConnection($this->url, $this->channel);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
