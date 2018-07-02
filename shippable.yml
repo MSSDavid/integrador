@@ -11,6 +11,4 @@ build:
     - mkdir -p shippable/testresults
     - mkdir -p shippable/codecoverage
     - phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage
-    - echo "testing"
-  push:
-    - git status
+    - echo "end tests"

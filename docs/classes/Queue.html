@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">2</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">4</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2048640926"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-232317612"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2048640926" class="accordion-body collapse in">
+            <div id="namespace-232317612" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -184,6 +184,12 @@
                         <section class="row-fluid public">
                             <section class="span4">
                                                                     <a href="../classes/Queue.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/Queue.html#method_getUrl" class="">getUrl()</a><br />
+                                                                    <a href="../classes/Queue.html#method_getChannel" class="">getChannel()</a><br />
+                                                                    <a href="../classes/Queue.html#method_setUrl" class="">setUrl()</a><br />
+                                                                    <a href="../classes/Queue.html#method_setChannel" class="">setChannel()</a><br />
+                                                                    <a href="../classes/Queue.html#method_openConnection" class="">openConnection()</a><br />
+                                                                    <a href="../classes/Queue.html#method_closeConnection" class="">closeConnection()</a><br />
                                                                     <a href="../classes/Queue.html#method_putMessage" class="">putMessage()</a><br />
                                                                     <a href="../classes/Queue.html#method_getMessage" class="">getMessage()</a><br />
                                                             </section>
@@ -207,17 +213,20 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
+                                                                    <a href="../classes/Queue.html#method_prepareToConnection" class="">prepareToConnection()</a><br />
                                                                     <a href="../classes/Queue.html#method_testUrl" class="">testUrl()</a><br />
-                                                                    <a href="../classes/Queue.html#method_openConnection" class="">openConnection()</a><br />
-                                                                    <a href="../classes/Queue.html#method_closeConnection" class="">closeConnection()</a><br />
+                                                                    <a href="../classes/Queue.html#method_openConn" class="">openConn()</a><br />
+                                                                    <a href="../classes/Queue.html#method_closeConn" class="">closeConn()</a><br />
                                                             </section>
                             <section class="span4">
+                                                                    <a href="../classes/Queue.html#property_original_url" class="">$original_url</a><br />
                                                                     <a href="../classes/Queue.html#property_url" class="">$url</a><br />
                                                                     <a href="../classes/Queue.html#property_channel" class="">$channel</a><br />
                                                                     <a href="../classes/Queue.html#property_channelConnection" class="">$channelConnection</a><br />
                                                                     <a href="../classes/Queue.html#property_exchange" class="">$exchange</a><br />
                                                                     <a href="../classes/Queue.html#property_vhost" class="">$vhost</a><br />
                                                                     <a href="../classes/Queue.html#property_conn" class="">$conn</a><br />
+                                                                    <a href="../classes/Queue.html#property_auto_connection" class="">$auto_connection</a><br />
                                                                     <a href="../classes/Queue.html#property_debug_mode" class="">$debug_mode</a><br />
                                                             </section>
                             <section class="span4">
@@ -262,16 +271,40 @@
 
                                                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_url" name="property_url" class="anchor"></a>
+            <a id="property_original_url" name="property_original_url" class="anchor"></a>
             <article class="property">
-                <h3 class="private ">$url</h3>
-                <pre class="signature">$url : string</pre>
+                <h3 class="private ">$original_url</h3>
+                <pre class="signature">$original_url : string</pre>
                 <p><em></em></p>
                 
 
                                 <h4>Type</h4>
                 string
-                &mdash; Url da instância do CloudAMAQP.                            </article>
+                &mdash; com a Url original da instância do CloudAMAQP.                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_url" name="property_url" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$url</h3>
+                <pre class="signature">$url : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; com Url da instância do CloudAMAQP interpretada.                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -406,6 +439,30 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="property_auto_connection" name="property_auto_connection" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$auto_connection</h3>
+                <pre class="signature">$auto_connection : boolean</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                boolean
+                &mdash; Controla a opção de auto conexão (Abre e fecha conexão automaticamente a cada operação no canal).                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="property_debug_mode" name="property_debug_mode" class="anchor"></a>
             <article class="property">
                 <h3 class="private ">$debug_mode</h3>
@@ -441,7 +498,7 @@
             <article class="method">
                 <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(  <span class="argument">$url</span>,   <span class="argument">$channel</span>,   <span class="argument">$debug_mode = false</span>) </pre>
+                <pre class="signature" style="margin-right: 54px;">__construct(  <span class="argument">$url</span>,   <span class="argument">$channel</span>,   <span class="argument">$auto_connection = true</span>,   <span class="argument">$debug_mode = false</span>) </pre>
                 <p><em>Construtor da classe, recebe os dados essenciais para realizar uma conexão com o CloudAMQP</em></p>
                 
 
@@ -459,10 +516,199 @@
                             </tr>
                                                     <tr>
                                 <td></td>
+                                <td>$auto_connection </td>
+                                <td><p>boolean por padrão true do modo de auto conexão.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
                                 <td>$debug_mode </td>
                                 <td><p>boolean por padrão false do modo de debug.</p></td>
                             </tr>
                                             </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getUrl" name="method_getUrl" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getUrl()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getUrl() : String</pre>
+                <p><em>Retorna a url da instância</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    String
+                                            &mdash; <p>com a url da intância</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getChannel" name="method_getChannel" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getChannel()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getChannel() : String</pre>
+                <p><em>Retorna o canal da instância</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    String
+                                            &mdash; <p>com o canal da intância</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setUrl" name="method_setUrl" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setUrl()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setUrl(  <span class="argument">$url</span>) : boolean</pre>
+                <p><em>Altera a url da instância, caso já não exista uma conexão em aberto</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$url </td>
+                                <td><p>String com a nova url</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>true caso a alteração tenha sido feito com sucesso, false caso contrário</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setChannel" name="method_setChannel" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setChannel()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setChannel(  <span class="argument">$channel</span>) : boolean</pre>
+                <p><em>Altera o canal da instância, caso já não exista uma conexão em aberto</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$channel </td>
+                                <td><p>String com o novo canal</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>true caso a alteração tenha sido feito com sucesso, false caso contrário</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_openConnection" name="method_openConnection" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">openConnection()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">openConnection() </pre>
+                <p><em>Esta função é a chamada pública para a abertura da conexão com o canal de mensagens, caso a opção de auto conexão esteja desabilitada e não exista uma conexão já em aberto. Esta função deve ser usada cuidadosamente para que a a conexão não fique aberta por tempo inderteminado no canal, ocupando o limite de conexões simultâneas.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_closeConnection" name="method_closeConnection" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">closeConnection()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">closeConnection() </pre>
+                <p><em>Esta função é a chamada pública para o fechamento da conexão com o canal de mensagens, caso a opção de auto conexão esteja desabilitada e exista uma conexão já em aberto. Sempre que a função openConnection for usada, após o uso do canal, esta função deve ser chamada para fechar a conexão com o servidor.</em></p>
+                
+
                 
                 
                 				
@@ -547,6 +793,45 @@
 
                                                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_prepareToConnection" name="method_prepareToConnection" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">prepareToConnection()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">prepareToConnection(  <span class="argument">$url</span>,   <span class="argument">$channel</span>) </pre>
+                <p><em>Esta função faz as configurações iniciais necessárias com a URL e com o canal para que uma conexão com o CloudAMQP seja aberta</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$url </td>
+                                <td><p>string para a url AMQP.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$channel </td>
+                                <td><p>string para o nome do canal.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_testUrl" name="method_testUrl" class="anchor"></a>
             <article class="method">
                 <h3 class="private ">testUrl()</h3>
@@ -576,11 +861,11 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_openConnection" name="method_openConnection" class="anchor"></a>
+            <a id="method_openConn" name="method_openConn" class="anchor"></a>
             <article class="method">
-                <h3 class="private ">openConnection()</h3>
+                <h3 class="private ">openConn()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">openConnection() </pre>
+                <pre class="signature" style="margin-right: 54px;">openConn() </pre>
                 <p><em>Esta função abre a conexão com o canal de mensagens</em></p>
                 
 
@@ -602,11 +887,11 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_closeConnection" name="method_closeConnection" class="anchor"></a>
+            <a id="method_closeConn" name="method_closeConn" class="anchor"></a>
             <article class="method">
-                <h3 class="private ">closeConnection()</h3>
+                <h3 class="private ">closeConn()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">closeConnection() </pre>
+                <pre class="signature" style="margin-right: 54px;">closeConn() </pre>
                 <p><em>Esta função fecha a conexão com o canal de mensagens</em></p>
                 
 
@@ -675,7 +960,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 20th, 2018 at 06:49.
+                    on July 2nd, 2018 at 10:34.
                 </section>
             </section>
         </section>

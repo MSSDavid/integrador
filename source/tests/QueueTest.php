@@ -5,7 +5,7 @@
  * @package     github.com/MSSDavid/integrador
  * @subpackage  Queue
  * @author      Samuel Costa <samu.rcosta@gmail.com>
- * @version     v.1.0.0 (20/06/2018)
+ * @version     v.1.2.0 (30/06/2018)
  * @since       v.1.0.0 (20/06/2018)
  * @copyright   Copyright (c) 2018, Samuel Costa
  */
@@ -68,6 +68,63 @@ final class QueueTest extends TestCase{
         $this->assertEquals(true, $put_response);
         $this->assertEquals($message, $returnMessage);
         $q->closeConnection();
+    }
+
+    /**
+     * Esta função testa a tentativa de colocar uma mensagem no canal sem ter estabelecido uma conexão
+     */
+    public function testPutMessageNoConnection(){
+        $q = new Queue($this->url, $this->channel, false);
+        // Sem conexão
+        //$q->openConnection();
+        $message = array("a" => 1, "b" => 10, "c" => "teste");
+        $message = json_encode($message);
+        $put_response =  $q->putMessage($message);
+
+        $this->assertEquals(false, $put_response);
+    }
+
+    /**
+     * Esta função testa a tentativa de colocar uma mensagem no canal sem ter estabelecido uma conexão com o debug mode ativado
+     */
+    public function testPutMessageNoConnectionDebugMode(){
+        $q = new Queue($this->url, $this->channel, false, true);
+        // Sem conexão
+        //$q->openConnection();
+        $message = array("a" => 1, "b" => 10, "c" => "teste");
+        $message = json_encode($message);
+        $put_response =  $q->putMessage($message);
+
+        $this->assertEquals(false, $put_response['response']);
+        $this->assertArrayHasKey('error', $put_response);
+        $this->assertEquals("No connection", $put_response['error']);
+    }
+
+    /**
+     * Esta função testa a tentativa de pegar uma mensagem no canal sem ter estabelecido uma conexão
+     */
+    public function testGetMessageNoConnection(){
+        $q = new Queue($this->url, $this->channel, false);
+        // Sem conexão
+        //$q->openConnection();
+        $get_response =  $q->getMessage();
+
+        $this->assertEquals(false, $get_response);
+    }
+
+    /**
+     * Esta função testa a tentativa de pegar uma mensagem no canal sem ter estabelecido uma conexão com o debug mode ativado
+     */
+    public function testGetMessageNoConnectionDebugMode(){
+        $q = new Queue($this->url, $this->channel, false, true);
+        // Sem conexão
+        //$q->openConnection();
+        $get_response =  $q->getMessage();
+
+
+        $this->assertEquals(false, $get_response['response']);
+        $this->assertArrayHasKey('error', $get_response);
+        $this->assertEquals("No connection", $get_response['error']);
     }
 
     /**

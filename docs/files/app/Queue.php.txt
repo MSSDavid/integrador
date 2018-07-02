@@ -19,7 +19,9 @@ use PhpAmqpLib\Message\AMQPMessage;
  *
  */
 class Queue{
-    /** @var string Url da instância do CloudAMAQP. */
+    /** @var string com a Url original da instância do CloudAMAQP. */
+    private $original_url;
+    /** @var array com Url da instância do CloudAMAQP interpretada. */
     private $url;
     /** @var string Nome do canal a ser trabalhado. */
     private $channel;
@@ -31,22 +33,93 @@ class Queue{
     private $vhost;
     /** @var object Conexão com o CloudAMQP. */
     private $conn;
+    /** @var boolean Controla a opção de auto conexão (Abre e fecha conexão automaticamente a cada operação no canal). */
+    private $auto_connection;
     /** @var boolean Controla a opção debug. */
     private $debug_mode;
 
     /**
      * Construtor da classe, recebe os dados essenciais para realizar uma conexão com o CloudAMQP
      *
-     * @param   $url        string para a url AMQP.
-     * @param   $channel    string para o nome do canal.
-     * @param   $debug_mode     boolean por padrão false do modo de debug.
+     * @param   $url                 string para a url AMQP.
+     * @param   $channel             string para o nome do canal.
+     * @param   $auto_connection     boolean por padrão true do modo de auto conexão.
+     * @param   $debug_mode          boolean por padrão false do modo de debug.
      */
-    public function __construct($url, $channel, $debug_mode = false){
+    public function __construct($url, $channel, $auto_connection = true, $debug_mode = false){
+        self::prepareToConnection($url, $channel);
+        $this->original_url = $url;
+        $this->debug_mode = $debug_mode;
+        $this->auto_connection = $auto_connection;
+        $this->channelConnection = null;
+        $this->conn = null;
+    }
+
+    /**
+     * Esta função faz as configurações iniciais necessárias com a URL e com o canal para que uma conexão com o CloudAMQP seja aberta
+     *
+     * @param   $url                 string para a url AMQP.
+     * @param   $channel             string para o nome do canal.
+     */
+    private function prepareToConnection($url, $channel){
         $this->url = parse_url($url);
         $this->channel = $channel;
         $this->exchange = $channel;
         $this->vhost = substr($this->url['path'], 1);
-        $this->debug_mode = $debug_mode;
+    }
+
+    /**
+     * Retorna a url da instância
+     *
+     * @return   String com a url da intância
+     */
+    public function getUrl(){
+        return $this->original_url;
+    }
+
+    /**
+     * Retorna o canal da instância
+     *
+     * @return   String com o canal da intância
+     */
+    public function getChannel(){
+        return $this->channel;
+    }
+
+    /**
+     * Altera a url da instância, caso já não exista uma conexão em aberto
+     *
+     * @param   $url    String com a nova url
+     *
+     * @return   boolean true caso a alteração tenha sido feito com sucesso, false caso contrário
+     */
+    public function setUrl($url){
+        if(!$this->channelConnection && !$this->conn) {
+            $this->original_url = $url;
+            // Prepara para a conexão novamente
+            self::prepareToConnection($this->original_url, $this->channel);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Altera o canal da instância, caso já não exista uma conexão em aberto
+     *
+     * @param   $channel    String com o novo canal
+     *
+     * @return   boolean true caso a alteração tenha sido feito com sucesso, false caso contrário
+     */
+    public function setChannel($channel){
+        if(!$this->channelConnection && !$this->conn) {
+            $this->channel = $channel;
+            // Prepara para a conexão novamente
+            self::prepareToConnection($this->original_url, $this->channel);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -55,31 +128,48 @@ class Queue{
      * @return boolean true caso a URL esteja válida e falso caso não esteja
      */
     private function testUrl(){
-        if(isset($this->url['host']) && isset($this->url['user']) && isset($this->url['pass'])){
-            return true;
-        }else{
-            return false;
+        return isset($this->url['host']) && isset($this->url['user']) && isset($this->url['pass']);
+    }
+
+    /**
+     * Esta função é a chamada pública para a abertura da conexão com o canal de mensagens, caso a opção de auto conexão esteja desabilitada e não exista uma conexão já em aberto. Esta função deve ser usada cuidadosamente para que a a conexão não fique aberta por tempo inderteminado no canal, ocupando o limite de conexões simultâneas.
+     */
+    public function openConnection(){
+        if(!$this->auto_connection && !$this->channelConnection && !$this->conn){
+            self::openConn();
         }
     }
 
     /**
      * Esta função abre a conexão com o canal de mensagens
      */
-    private function openConnection(){
+    private function openConn(){
         $this->conn = new AMQPStreamConnection($this->url['host'], 5672, $this->url['user'], $this->url['pass'], $this->vhost);
         $this->channelConnection = $this->conn->channel();
         $this->channelConnection->queue_declare($this->channel, false, true, false, false);
-        //$this->channelConnection->exchange_declare($this->exchange, 'direct', true, true, false);
         $this->channelConnection->exchange_declare($this->exchange, 'fanout', false, true, false);
         $this->channelConnection->queue_bind($this->channel, $this->exchange);
     }
 
     /**
+     * Esta função é a chamada pública para o fechamento da conexão com o canal de mensagens, caso a opção de auto conexão esteja desabilitada e exista uma conexão já em aberto. Sempre que a função openConnection for usada, após o uso do canal, esta função deve ser chamada para fechar a conexão com o servidor.
+     */
+    public function closeConnection(){
+        if(!$this->auto_connection && $this->channelConnection && $this->conn){
+            self::closeConn();
+        }
+    }
+
+    /**
      * Esta função fecha a conexão com o canal de mensagens
      */
-    private function closeConnection(){
+    private function closeConn(){
         $this->channelConnection->close();
         $this->conn->close();
+
+        // Muda para null as variáveis
+        $this->channelConnection = null;
+        $this->conn = null;
     }
 
     /**
@@ -92,11 +182,17 @@ class Queue{
     public function putMessage($message){
         if(self::testUrl()){
             try{
-                self::openConnection();
-                //$msg = new AMQPMessage($message, array('content_type' => 'text/plain', 'delivery_mode' => 2));
+                if($this->auto_connection) {
+                    self::openConn();
+                }
+
                 $msg = new AMQPMessage($message, array('content_type' => 'text/plain', 'delivery_mode' => 2));
                 $this->channelConnection->basic_publish($msg, $this->exchange);
-                self::closeConnection();
+
+                if($this->auto_connection) {
+                    self::closeConn();
+                }
+
                 if($this->debug_mode){
                     return array("response" => true);
                 }else{
@@ -126,7 +222,10 @@ class Queue{
     public function getMessage(){
         if(self::testUrl()){
             try{
-                self::openConnection();
+                if($this->auto_connection){
+                    self::openConn();
+                }
+
                 $retrived_msg = $this->channelConnection->basic_get($this->channel);
                 $message_type = gettype($retrived_msg);
                 if($message_type == "object"){
@@ -135,7 +234,11 @@ class Queue{
                 }else{
                     $return = null;
                 }
-                self::closeConnection();
+
+                if($this->auto_connection) {
+                    self::closeConn();
+                }
+
                 if($this->debug_mode){
                     return array("response" => true, "message" => $return);
                 }else{

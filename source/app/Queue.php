@@ -5,7 +5,7 @@
  * @package     github.com/MSSDavid/integrador
  * @subpackage  Queue
  * @author      Samuel Costa <samu.rcosta@gmail.com>
- * @version     v.1.0.1 (20/06/2018)
+ * @version     v.1.2.0 (30/06/2018)
  * @since       v.1.0.0 (19/06/2018)
  * @copyright   Copyright (c) 2018, Samuel Costa
  */
@@ -19,7 +19,9 @@ use PhpAmqpLib\Message\AMQPMessage;
  *
  */
 class Queue{
-    /** @var string Url da instância do CloudAMAQP. */
+    /** @var string com a Url original da instância do CloudAMAQP. */
+    private $original_url;
+    /** @var array com Url da instância do CloudAMAQP interpretada. */
     private $url;
     /** @var string Nome do canal a ser trabalhado. */
     private $channel;
@@ -46,6 +48,7 @@ class Queue{
      */
     public function __construct($url, $channel, $auto_connection = true, $debug_mode = false){
         self::prepareToConnection($url, $channel);
+        $this->original_url = $url;
         $this->debug_mode = $debug_mode;
         $this->auto_connection = $auto_connection;
         $this->channelConnection = null;
@@ -71,7 +74,7 @@ class Queue{
      * @return   String com a url da intância
      */
     public function getUrl(){
-        return $this->url;
+        return $this->original_url;
     }
 
     /**
@@ -92,9 +95,9 @@ class Queue{
      */
     public function setUrl($url){
         if(!$this->channelConnection && !$this->conn) {
-            $this->url = $url;
+            $this->original_url = $url;
             // Prepara para a conexão novamente
-            self::prepareToConnection($this->url, $this->channel);
+            self::prepareToConnection($this->original_url, $this->channel);
             return true;
         }else{
             return false;
@@ -112,7 +115,7 @@ class Queue{
         if(!$this->channelConnection && !$this->conn) {
             $this->channel = $channel;
             // Prepara para a conexão novamente
-            self::prepareToConnection($this->url, $this->channel);
+            self::prepareToConnection($this->original_url, $this->channel);
             return true;
         }else{
             return false;
@@ -183,6 +186,15 @@ class Queue{
                     self::openConn();
                 }
 
+                // Verifica se existe conexão
+                if(!$this->channelConnection && !$this->conn) {
+                    if($this->debug_mode){
+                        return array("response" => false, "error" => "No connection");
+                    }else{
+                        return false;
+                    }
+                }
+
                 $msg = new AMQPMessage($message, array('content_type' => 'text/plain', 'delivery_mode' => 2));
                 $this->channelConnection->basic_publish($msg, $this->exchange);
 
@@ -221,6 +233,15 @@ class Queue{
             try{
                 if($this->auto_connection){
                     self::openConn();
+                }
+
+                // Verifica se existe conexão
+                if(!$this->channelConnection && !$this->conn) {
+                    if($this->debug_mode){
+                        return array("response" => false, "error" => "No connection");
+                    }else{
+                        return false;
+                    }
                 }
 
                 $retrived_msg = $this->channelConnection->basic_get($this->channel);
