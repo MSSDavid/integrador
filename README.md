@@ -83,13 +83,5 @@ Porém há um limite de 5000 solititações à API do GitHub por hora.
  ## Documentação do Código Fonte
  [Clique aqui](https://mssdavid.github.io/integrador/) para acessar a documentação.
  
- ## Comunicação
+ ## Comunicação 
  Pessoal e WhatsApp.
-
-## Ferramentas
-Visual Studio Code, GitHub, Emitter-io.
-
-## Linguagens Utilizadas
-
-Javascript,
-HTML
