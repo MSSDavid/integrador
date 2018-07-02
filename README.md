@@ -1,14 +1,13 @@
 [![Run Status](https://api.shippable.com/projects/5b286fd26104a90700905497/badge?branch=master)](https://app.shippable.com/github/MSSDavid/integrador)
 [![Coverage Badge](https://api.shippable.com/projects/5b286fd26104a90700905497/coverageBadge?branch=master)](https://app.shippable.com/github/MSSDavid/integrador)  
 
-# Integrador
-Implementação de uma solução de integração na qual utiliza o método de troca de mensagens da disciplina de Integração de Aplicações - 2018.1.
+# Integrador de Microserviços
+*Universidade Federal de Goiás - Engenharia de Software (2018/1)*   
+*Integração de Aplicações*   
 
-## Projeto
-No contexto da disciplina Integração de Aplicações, de Engenharia de software -
-UFG, para o trabalho final foi definido uma aplicação de integração, que utilize o meio da técnica
-de troca de mensagens.  
- 
+Implementação de uma solução para a integração entre dois microserviços de um software, nos quais possuem filas distintas de processamento. A classe [Queue.php](https://github.com/MSSDavid/integrador/blob/master/source/app/Queue.php) utiliza o método de troca de mensagens através do [RabbitMQ](https://www.rabbitmq.com/).
+
+## Problema a ser Resolvido
  O problema a ser resolvido será a comunicação entre dois microserviços de uma aplicação que oferece o serviço que realiza replicações de segurança de repositórios do GitHub na núvem do Google Drive.  
 
 Esta aplicação deverá possuir suporte para milhares usuários cadastrados, portanto a aplicação deve estar preparada para receber vários commits por segundo. A tarefa de realizar a cópia do GitHub para o Google Drive não é instantânea, pois necessitará de recursos de rede e disco principalmente. Para realizar toda a tarefa demandada, uma fila de processamento deve ser estabelecida, por isso a divisão em dois microserviços.  
