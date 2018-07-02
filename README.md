@@ -1,7 +1,6 @@
 [![Run Status](https://api.shippable.com/projects/5b286fd26104a90700905497/badge?branch=master)](https://app.shippable.com/github/MSSDavid/integrador)
-[![Coverage Badge](https://api.shippable.com/projects/5b286fd26104a90700905497/coverageBadge?branch=master)](https://app.shippable.com/github/MSSDavid/integrador)  
-![Bug Badge](https://sonarcloud.io/api/project_badges/measure?project=integraccaoi2018&metric=bugs)
-
+[![Coverage Badge](https://api.shippable.com/projects/5b286fd26104a90700905497/coverageBadge?branch=master)](https://app.shippable.com/github/MSSDavid/integrador) 
+[![Bug Badge](https://sonarcloud.io/api/project_badges/measure?project=integraccaoi2018&metric=bugs)](https://sonarcloud.io/dashboard?id=integraccaoi2018)  
 
 # Integrador de Microserviços
 *Universidade Federal de Goiás - Engenharia de Software (2018/1)*   
